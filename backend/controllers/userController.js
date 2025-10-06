@@ -85,7 +85,7 @@ export async function getCurrentUser(req, res) {
 }    
 
 //Update USer Profile
-export async function updateUserProfile(req, res) {
+export async function updateProfile(req, res) {
     const { name, email } = req.body;
 
     // Validation
