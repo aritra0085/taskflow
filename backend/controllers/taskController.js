@@ -30,7 +30,7 @@ export const getTasks = async (req, res) => {
     }
 }    
 
-//GET SINGLE TASK BY ID (MUST BELONG TO THAT USER
+//GET SINGLE TASK BY ID (MUST BELONG TO THAT USER)
 export const getTaskById = async (req, res) => {
     try {
         const task = await Task.findOne({ _id: req.params.id, owner: req.user.id });
@@ -45,3 +45,28 @@ export const getTaskById = async (req, res) => {
         res.status(500).json({ success: false, message: err.message });
     }
 };    
+
+//UPDATE A TASK (MUST BELONG TO THAT USER)
+export const updateTask = async (req, res) => {
+    try {
+        const data = { ...req.body };
+        if (data.completed !== undefined) {
+            data.completed = data.completed === 'yes' || data.completed === true;
+        }
+
+        const updated = await Task.findOneAndUpdate(
+            { _id: req.params.id, owner: req.user.id },
+            data,
+            { new: true, runValidators: true }
+        );
+        if (!updated)
+            return res.status(404).json({
+                success: false,
+                message: 'Task not found'
+            });
+            res.json({ success: true, task: updated });
+    }
+    catch (err) {
+        res.status(400).json({ success: false, message: err.message });
+    }
+}        
