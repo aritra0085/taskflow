@@ -69,4 +69,21 @@ export const updateTask = async (req, res) => {
     catch (err) {
         res.status(400).json({ success: false, message: err.message });
     }
-}        
+}      
+
+//DELETE A TASK (MUST BELONG TO THAT USER)
+export const deleteTask = async (req, res) => {
+    try {
+        const deleted = await Task.findOneAndDelete({ _id: req.params.id, owner: req.user.id });
+
+        if (!deleted)
+            return res.status(404).json({
+                success: false,
+                message: 'Task not found'
+            });
+        res.json({ success: true, message: 'Task deleted successfully' });
+    }
+    catch (err) {
+        res.status(500).json({ success: false, message: err.message });
+    }
+};    
