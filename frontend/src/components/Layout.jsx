@@ -1,4 +1,4 @@
-import React, {useCallback, useState } from 'react'
+import React, {useCallback, useEffect, useMemo, useState } from 'react'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 import { Outlet } from 'react-router-dom';
@@ -34,7 +34,28 @@ const Layout = ({onLogout,user}) => {
     } finally {
         setLoading(false)
       }
-  })   
+  }, [onLogout])
+  
+  useEffect(() => { fetchTasks()}, [fetchTasks])
+
+  const stats = useMemo(() => {
+    const completedTasks = tasks.filter(t =>
+      t.completed === true ||
+      t.completed === 1 ||
+      (typeof t.completed === 'string' && t.completed.toLowerCase() === 'yes')
+    ).length
+
+    const totalCount = tasks.length
+    const pendingCount = totalCount - completedTasks
+    const completionPercentage = totalCount ?
+      Math.round((completedTasks / totalCount) * 100) : 0
+
+    return {totalCount,
+            completedTasks,
+            pendingCount,
+            completionPercentage
+          }
+  })
 
   return (
     <div className='min-h-screen bg-gray-50'>
