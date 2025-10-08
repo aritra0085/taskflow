@@ -29,6 +29,8 @@ const Navbar = () => {
               onClick={() => navigate('/profile')}>
                 <Settings className='w-5 h-5'/>
             </button>
+
+            {/* USER DROPDOWN */}
           </div>
       </div>
     </header>
