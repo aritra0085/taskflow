@@ -74,7 +74,7 @@ const StatCard = ({title, value, icon}) => (
   </div>
 )
 
-
+  //Loading
 
   return (
     <div className='min-h-screen bg-gray-50'>
