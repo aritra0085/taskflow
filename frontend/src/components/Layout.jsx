@@ -55,7 +55,7 @@ const Layout = ({onLogout,user}) => {
             pendingCount,
             completionPercentage
           }
-  })
+  }, [tasks])
 
   return (
     <div className='min-h-screen bg-gray-50'>
