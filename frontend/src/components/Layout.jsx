@@ -57,6 +57,22 @@ const Layout = ({onLogout,user}) => {
           }
   }, [tasks])
 
+//STATISTICS CARD
+const StatCard = ({title, value, icon}) => (
+  <div className='p-2 sm:p-3 rounded-xl bg-white shadow-sm border border-purple-100 hover:shadow-md transition-all duration-300 hover:border-purple-100 group'>
+    <div className='flex items-center gap-2'>
+      <div className='p-1.5 rounded-lg bg-gradient-to-br from-fuchsia-500/10 to-purple-500/10 group-hover:from-fuchsia-500/20 group-hover:to-purple-500/20 transition-colors duration-300'>
+        {icon}
+      </div>
+      <div className='min-w-0'>
+          <p className='text-lg sm:text-xl font-bold bg-gradient-to-r from-fuchsia-500 to-purple-600 bg-clip-text text-transparent'>
+            {value}
+          </p>
+      </div>
+    </div>
+  </div>
+)
+
   return (
     <div className='min-h-screen bg-gray-50'>
       <Navbar user={user} onLogout={onLogout}/>
