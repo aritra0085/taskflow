@@ -68,10 +68,13 @@ const StatCard = ({title, value, icon}) => (
           <p className='text-lg sm:text-xl font-bold bg-gradient-to-r from-fuchsia-500 to-purple-600 bg-clip-text text-transparent'>
             {value}
           </p>
+          <p className='text-xs text-gray-500 font-medium'>{title}</p>
       </div>
     </div>
   </div>
 )
+
+
 
   return (
     <div className='min-h-screen bg-gray-50'>
