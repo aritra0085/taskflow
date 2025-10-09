@@ -11,7 +11,17 @@ const SignUp = () => {
   const [loading,setLoading] = useState(false)
   const [message, setMessage] = useState({text: "", type:""})
 
-  
+  const handleSUbmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    setMessage({text: "", type: ""})
+
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
 
   return (
     <div className='max-w-md w-full bg-white shadow-lg border border-purple-100 rounded-xl p-8'>
