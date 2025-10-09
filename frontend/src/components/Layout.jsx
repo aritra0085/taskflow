@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 import { Outlet } from 'react-router-dom';
 import axios from 'axios';
-import {TreadingUp} from 'lucide-react'
+import {Circle, TreadingUp, Zap} from 'lucide-react'
 
 const Layout = ({onLogout,user}) => {
 
@@ -112,7 +112,17 @@ const StatCard = ({title, value, icon}) => (
                     <div className='bg-white rounded-xl p-4 sm:p-5 shadow-sm border border-purple-100'>
                         <h3 className='text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-gray-800 flex items-center gap-2'>
                           <TreadingUp className='w-4 h-4 sm:w-5 sm:h-5 text-purple-500'/>
+                          Task Statistics
                         </h3>
+
+                        <div className='grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6'>
+                            <StatCard title='Total Tasks' value={stats.totalCount} icon={< Circle className='w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-500'/>}/>
+                            <StatCard title='Completed' value={stats.completedTasks} icon={< Circle className='w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500'/>}/>
+                            <StatCard title='Pending' value={stats.pendingCount} icon={< Circle className='w-3.5 h-3.5 sm:w-4 sm:h-4 text-fuchsia-500'/>}/>
+                            <StatCard title='Completion Rate' value={`${stats.completionPercentage}%`} icon={< Zap className='w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-500'/>}/>
+                        </div>
+
+                        <hr className=''/>
                     </div>
                </div>
           </div>
