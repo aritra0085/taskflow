@@ -106,6 +106,14 @@ const StatCard = ({title, value, icon}) => (
                <div className='xl:col-span-2 space-y-3 sm:space-y-4'>
                     <Outlet context={{tasks, refreshTasks: fetchTasks }}/>
                </div>
+
+               <div className='xl:col-span-1 space-y-4 sm:space-y-6'>
+                    <div className='bg-white rounded-xl p-4 sm:p-5 shadow-sm border border-purple-100'>
+                        <h3 className='text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-gray-800 flex items-center gap-2'>
+                          <TreadingUp className='w-4 h-4 sm:w-5 sm:h-5 text-purple-500'/>
+                        </h3>
+                    </div>
+               </div>
           </div>
       </div>
     </div>
