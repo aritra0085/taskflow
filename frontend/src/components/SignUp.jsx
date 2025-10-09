@@ -23,7 +23,12 @@ const SignUp = () => {
           setMessage({text: "Registration successful! You can now log in.", type:"success"})
           setFormData(INITIAL_FORM)
     } catch (error) {
-      
+          console.error("Signup error:",err)
+          setMessage({text: err.response?.data?.message || "An error occoured. Plese try again.", type:"error"})
+
+    }
+    finally{
+      setLoading(false)
     }
   }
 
