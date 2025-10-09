@@ -122,7 +122,19 @@ const StatCard = ({title, value, icon}) => (
                             <StatCard title='Completion Rate' value={`${stats.completionPercentage}%`} icon={< Zap className='w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-500'/>}/>
                         </div>
 
-                        <hr className=''/>
+                        <hr className='my-3 sm:my-4 border-purple-100'/>
+
+                        <div className='space-y-2 sm:space-y-3'>
+                            <div className='flex items-center justify-between text-gray-700'>
+                                <span className='text-xs sm:text-sm font-medium flex items-center gap-1.5'>
+                                    <Circle className='w-2.5 h-2.5 sm:w-3 text-purple-500 fill-purple-500'/>
+                                    Task Progress
+                                </span>
+                                <span>
+                                  
+                                </span>
+                            </div>
+                        </div>
                     </div>
                </div>
           </div>
