@@ -78,8 +78,21 @@ const StatCard = ({title, value, icon}) => (
   if (loading) return (
     <div className='min-h-screen bg-gray-50 flex items-center justify-center'>
         <div className='animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500'>
-
         </div>
+    </div>
+  )
+
+  //ERROR
+  if (error) return (
+    <div className='min-h-screen bg-gray-50 p-6 flex items-center justify-center'>
+        <div className='bg-red-50 text-red-600 p-4 rounded-xl border border-red-100 max-w-md'>
+          <p className='font-medium mb-2'>Error loading tasks</p>
+          <p className='text-sm'>{error}</p>
+            <button onClick={fetchTasks} className='mt-4 py-2 px-4 bg-red-100  text-red-700 rounded-lg text-sm font-medium hover:bg-red-200 transition-colors'>
+                Try Again
+            </button>
+        </div>
+
     </div>
   )
 
