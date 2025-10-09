@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 import { Outlet } from 'react-router-dom';
 import axios from 'axios';
-import {Circle, Clock, TreadingUp, Zap} from 'lucide-react'
+import { Circle, Clock, TrendingUp, Zap } from 'lucide-react'
 
 const Layout = ({onLogout,user}) => {
 
@@ -111,7 +111,7 @@ const StatCard = ({title, value, icon}) => (
                <div className='xl:col-span-1 space-y-4 sm:space-y-6'>
                     <div className='bg-white rounded-xl p-4 sm:p-5 shadow-sm border border-purple-100'>
                         <h3 className='text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-gray-800 flex items-center gap-2'>
-                          <TreadingUp className='w-4 h-4 sm:w-5 sm:h-5 text-purple-500'/>
+                          <TrendingUp className='w-4 h-4 sm:w-5 sm:h-5 text-purple-500'/>
                           Task Statistics
                         </h3>
 
@@ -169,7 +169,19 @@ const StatCard = ({title, value, icon}) => (
                                 </div>  
                               ))}
 
-
+                              {tasks.length === 0 &&(
+                                <div className='text-center py-4 sm:py-6 px-2'>
+                                    <div className='w-12 h-12 sm:w-16 mx-auto sm:mb-4 rounded-full bg-purple-100 flex items-center justify-center'>
+                                        <Clock className='w-6 h-6 sm:w-8 sm:h-8 text-purple-500'/>
+                                    </div>
+                                    <p className='text-sm text-gray-500'>
+                                      No recent activity
+                                    </p>
+                                    <p className='text-xs text-gray-400 mt-1'>
+                                        Task will appear here
+                                    </p>
+                                </div>
+                              )}
                           </div>
                     </div>
                </div>
