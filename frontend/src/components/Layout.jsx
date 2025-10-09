@@ -159,7 +159,13 @@ const StatCard = ({title, value, icon}) => (
                                       <p className='text-sm font-medium text-gray-700 break-words whitespace-normal'>
                                         {task.title}
                                       </p>
+                                      <p className='text-xs text-gray-500 mt-0.5'>
+                                          {task.createdAt ? new Data(task.createdAt).toLocaleDataString() : "no data"}
+                                      </p>
                                   </div>
+                                  <span className={`px-2 py-1 text-xs rounded-full shrink-0 ml-2 ${task.completed ? 'bg-green-100 text-green-700' : 'bg-fuchsia-100 text-fuchsia-700'}`}>
+                                        
+                                  </span>
                                 </div>  
                               ))}
                           </div>
