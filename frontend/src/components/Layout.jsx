@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 import { Outlet } from 'react-router-dom';
 import axios from 'axios';
-import {Circle, TreadingUp, Zap} from 'lucide-react'
+import {Circle, Clock, TreadingUp, Zap} from 'lucide-react'
 
 const Layout = ({onLogout,user}) => {
 
@@ -135,10 +135,22 @@ const StatCard = ({title, value, icon}) => (
                                 </span>
                             </div>
 
-                            <div>
-                              
+                            <div className='realtive pt-1'>
+                                <div className='flex gap-1.5 items-center'>
+                                  <div className='flex-1 h-2 sm:h-3 bg-purple-100 rounded-full overflow-hidden'>
+                                      <div className='h-full bg-gradient-to-r from-fuchsia-500 to-purple-600 transition-all duration-500'
+                                      style={{width: `${stats.completionPercentage}%` }}/>
+                                  </div>
+                                </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div className='bg-white rounded-xl p-4 sm:p-5 shadow-sm border border-purple-100'>
+                          <h3 className='text-base sm:text-lg font-semibold mb-3 text-gray-800 flex items-center gap-2'>
+                              <Clock className='w-4 h-4 sm:h-5 sm:w-5 text-purple-500'/>
+                              Recent Activity
+                          </h3>
                     </div>
                </div>
           </div>
