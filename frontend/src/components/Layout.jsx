@@ -151,6 +151,18 @@ const StatCard = ({title, value, icon}) => (
                               <Clock className='w-4 h-4 sm:h-5 sm:w-5 text-purple-500'/>
                               Recent Activity
                           </h3>
+
+                          <div className='space-y-2 sm:space-y-3'>
+                              {tasks.slice(0, 3).map((task) => (
+                                <div key={task._id || task.id} className='flex items-center justify-between p-2 sm:p-3 hover:bg-purple-50/50 rounded-lg transition-colors duration-200 border border-transparent hover:border-purple-100'>
+                                  <div className='flex-1 min-w-0'>
+                                      <p className='text-sm font-medium text-gray-700 break-words whitespace-normal'>
+                                        {task.title}
+                                      </p>
+                                  </div>
+                                </div>  
+                              ))}
+                          </div>
                     </div>
                </div>
           </div>
