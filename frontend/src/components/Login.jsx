@@ -5,7 +5,7 @@ import { Eye, EyeOff, LogIn } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 
 const INITIAL_FORM = {email: "", password: ""}
-const Login = () => {
+const Login = ({onSubmit,onSwitchMode}) => {
 
   const [showPassword, setShowPassword] = useState(false)
   const [loading,setLoading] = useState(false)
@@ -13,6 +13,27 @@ const Login = () => {
   const [rememberMe,setRememberMe] = useState(false)
   const navigate = useNavigate()
   const url = 'http://localhost:4000/'
+
+  const handleSubmit = async (e) => {
+    e.preventdefault()
+    if (!rememberMe) {
+      toast.error('You must enable "Remember Me" to login.')
+        return
+    }
+    setLoading(true)
+
+    try {
+      
+    }
+     catch (error) {
+      
+    }
+  }
+
+  const handleSwitchMode = () => {
+    toast.dismiss()
+    onSwitchMode?.()
+  }
 
   return (
     <div className='max-w-md bg-white w-full shadow-lg border border-purple-100 rounded-xl p-8'>
@@ -58,6 +79,13 @@ const Login = () => {
             </>}
         </button>
       </form>
+
+      <p className='text-center text-sm text-gray-600 mt-6'>
+          Don't have an account?{' '}
+          <button type='button' className='text-purple-600 hover:text-purple-700 hover:underline font-medium transition-colors' onClick={handleSwitchMode}>
+              Sign Up
+          </button>
+      </p>
     </div>
   )
 }
