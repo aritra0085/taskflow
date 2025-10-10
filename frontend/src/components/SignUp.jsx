@@ -64,7 +64,7 @@ const SignUp = ({onSwitchMode}) => {
           </button>
 
           <p className='text-center text-sm text-gray-600 mt-6'>
-              Alrady have an account?{' '}
+              Already have an account?{' '}
               <button onClick={onSwitchMode} className='text-purple-600 hover:text-purple-700 hover:underline font-medium transition-colors'>
                   Login
               </button>
