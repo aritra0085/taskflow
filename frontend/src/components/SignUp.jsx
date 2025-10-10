@@ -1,28 +1,28 @@
 import { Icon, UserPlus } from 'lucide-react'
 import React, { useState } from 'react'
-import {Inputwrapper, MESSAGE_ERROR, MESSAGE_SUCCESS} from '../assets/dummy'
+import {BUTTONCLASSES, FIELDS, Inputwrapper, MESSAGE_ERROR, MESSAGE_SUCCESS} from '../assets/dummy'
 import axios from 'axios'
 
 const API_URL = "http://localhost:4000/"
 const INITIAL_FORM = {name: "",email: "", password: ""}
 
-const SignUp = () => {
+const SignUp = ({onSwitchMode}) => {
 
   const [formData,setFormData] = useState(INITIAL_FORM);  
   const [loading,setLoading] = useState(false)
   const [message, setMessage] = useState({text: "", type:""})
 
-  const handleSUbmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
     setMessage({text: "", type: ""})
 
     try {
-          const {data} = await axios.post(`${API_URL}/api/user/register`,formData)
+          const {data} = await axios.post(`${API_URL}api/user/register`,formData)
           console.log("Signup Successfull",data)
           setMessage({text: "Registration successful! You can now log in.", type:"success"})
           setFormData(INITIAL_FORM)
-    } catch (error) {
+    } catch (err) {
           console.error("Signup error:",err)
           setMessage({text: err.response?.data?.message || "An error occoured. Plese try again.", type:"error"})
 
@@ -50,7 +50,7 @@ const SignUp = () => {
         </div>
       )}  
 
-      <from onSubmit={handleSUbmit} className='space-y-4'>
+      <form onSubmit={handleSubmit} className='space-y-4'>
           {FIELDS.map(({name, type, placeholder, icon: Icon}) => (
             <div key={name} className={Inputwrapper}>
                 <Icon className='text-purple-500 w-5 h-5 mr-2'/>
@@ -59,11 +59,22 @@ const SignUp = () => {
                 className='w-full focus:outline-none text-sm text-gray-700' required/>
             </div>
           ))}
-      </from>
+          <button type='submit' className={BUTTONCLASSES} disabled={loading}>
+                {loading ? "Signing Up..." : <><UserPlus className='w-4 h-4'/></>}
+          </button>
+
+          <p className='text-center text-sm text-gray-600 mt-6'>
+              Alrady have an account?{' '}
+              <button onClick={onSwitchMode} className='text-purple-600 hover:text-purple-700 hover:underline font-medium transition-colors'>
+                  Login
+              </button>
+          </p>
+      </form>
     </div>
 
 
   )
 }
 
-export default SignUp
+export default SignUp;
+

@@ -286,7 +286,9 @@ export const TI_CLASSES = {
     createdRow: "flex items-center gap-1.5 text-xs text-gray-400 whitespace-nowrap",
 }
 // APP.JSX
+const data = {name: "Aritra Biswas"};
 const user = {
-      avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(data.name || 'User')}&background=random`
-    };
+  name: data.name,
+  avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(data.name || 'User')}&background=random`
+};
 

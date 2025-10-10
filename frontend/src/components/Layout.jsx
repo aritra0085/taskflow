@@ -18,6 +18,7 @@ const Layout = ({onLogout,user}) => {
     try {
       const token = localStorage.getItem('token')
       if(!token) throw new Error('No auth token found')
+      
 
       const {data} = await axios.get("http://localhost:4000/api/tasks/gp",{
         headers: {
@@ -160,7 +161,7 @@ const StatCard = ({title, value, icon}) => (
                                         {task.title}
                                       </p>
                                       <p className='text-xs text-gray-500 mt-0.5'>
-                                          {task.createdAt ? new Data(task.createdAt).toLocaleDataString() : "no data"}
+                                          {task.createdAt ? new Date(task.createdAt).toLocaleDataString() : "no data"}
                                       </p>
                                   </div>
                                   <span className={`px-2 py-1 text-xs rounded-full shrink-0 ml-2 ${task.completed ? 'bg-green-100 text-green-700' : 'bg-fuchsia-100 text-fuchsia-700'}`}>
