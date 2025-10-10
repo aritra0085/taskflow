@@ -3,6 +3,7 @@ import {toast, ToastContainer} from 'react-toastify'
 import { BUTTON_CLASSES, INPUTWRAPPER,fields } from '../assets/dummy'
 import { Eye, EyeOff, LogIn } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const INITIAL_FORM = {email: "", password: ""}
 const Login = ({onSubmit,onSwitchMode}) => {
@@ -23,7 +24,15 @@ const Login = ({onSubmit,onSwitchMode}) => {
     setLoading(true)
 
     try {
-      
+        const {data} = await axios.post(`${url}/api/user/login`,formData)
+        if (!data.token) throw new Error(data.message || "Login failed")
+
+        localStorage.setItem("token", data.token)
+        localStorage.setItem("userId", data.user.id)
+        setFormData(INITIAL_FORM)
+        onSubmit?.({token: data.token,userId: data.user.id, ...data.user})
+        toast.success("Login successful! Redirecting...")
+        setTimeout(() => navigate("/"), 1000)  
     }
      catch (error) {
       
