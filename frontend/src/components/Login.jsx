@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {toast, ToastContainer} from 'react-toastify'
-import { INPUTWRAPPER,fields } from '../assets/dummy'
+import { BUTTON_CLASSES, INPUTWRAPPER,fields } from '../assets/dummy'
 import { Eye, EyeOff, LogIn } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 
@@ -41,6 +41,22 @@ const Login = () => {
             )}
           </div>
         ))}
+
+        <div className='flex items-center'>
+            <input type='checkbox' id='rememberMe' checked={rememberMe} onChange={() => setRememberMe(!rememberMe)}
+              className='h-4 w-4 text-purple-500 focus:ring-purple-400 border-gray-300 rounded' required/>
+          <label htmlFor='rememberMe'
+              className='ml-2 block text-sm text-gray-700'>Remember Me</label>
+        </div>
+
+        <button type='submit' className={BUTTON_CLASSES} disabled={loading}>
+          {loading ? (
+            "Loggin in..."
+          ):
+            <>
+              <LogIn className='w-4 h-4'/> Login
+            </>}
+        </button>
       </form>
     </div>
   )
