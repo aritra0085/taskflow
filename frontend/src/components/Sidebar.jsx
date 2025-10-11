@@ -18,7 +18,7 @@ const Sidebar = ({user, tasks}) => {
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "auto"
     return() => {documents.body.style.overflow = "auto"}
-  })
+  },[mobileOpen])
   return (
     <>
     {/* {Desktop Sidebar} */}
