@@ -18,7 +18,7 @@ const Sidebar = ({user, tasks}) => {
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "auto"
-    return() => {documents.body.style.overflow = "auto"}
+    return () => {document.body.style.overflow = "auto"}
   },[mobileOpen])
 
 
@@ -31,8 +31,11 @@ const Sidebar = ({user, tasks}) => {
             isActive ? LINK_CLASSES.active : LINK_CLASSES.inactive,
             isActive ? "justify-start" : "lg:justify-start"
           ].join(" ")} onClick={() => setMobileOpen(false)}>
-              <span>
-                
+              <span className={LINK_CLASSES.icon}>
+                {icon}
+              </span>
+              <span className={` ${isMobile ? "block" : "hidden lg:block"} ${LINK_CLASSES}`}>
+                {text}
               </span>
           </NavLink>
         </li>
