@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { PRODUCTIVITY_CARD, SIDEBAR_CLASSES } from '../assets/dummy'
+import { LINK_CLASSES, menuItems, PRODUCTIVITY_CARD, SIDEBAR_CLASSES } from '../assets/dummy'
 import { Sparkle } from 'lucide-react'
+import { NavLink } from 'react-router-dom'
 const Sidebar = ({user, tasks}) => {
 
   const [mobileOpen,setMobileOpen] =useState(false)
@@ -19,6 +20,26 @@ const Sidebar = ({user, tasks}) => {
     document.body.style.overflow = mobileOpen ? "hidden" : "auto"
     return() => {documents.body.style.overflow = "auto"}
   },[mobileOpen])
+
+
+  const renderMenuItems = (isMobile = false) => {
+    <ul className='space-y-2'>
+      {menuItems.map(({text,path,icon}) => (
+        <li key={text}>
+          <NavLink to={path} className={({isActive}) => [
+            LINK_CLASSES.base,
+            isActive ? LINK_CLASSES.active : LINK_CLASSES.inactive,
+            isActive ? "justify-start" : "lg:justify-start"
+          ].join(" ")} onClick={() => setMobileOpen(false)}>
+              <span>
+                
+              </span>
+          </NavLink>
+        </li>
+      ))}
+    </ul>
+  }
+
   return (
     <>
     {/* {Desktop Sidebar} */}
