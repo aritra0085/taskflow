@@ -54,7 +54,7 @@ const Sidebar = ({user, tasks}) => {
               </div>
 
               <div>
-                <h2 className='text-lg font-bold text-gray-800'>Hey,{username}</h2>
+                <h2 className='text-lg font-bold text-gray-800'>Hey, {username}</h2>
                 <p className='text-sm text-purple-500 font-medium flex items-center gap-1'>
                   <Sparkle className='w-3 h-3'/>Let's crush some tasks!
                 </p>
