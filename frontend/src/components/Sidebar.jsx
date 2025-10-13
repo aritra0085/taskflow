@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { LINK_CLASSES, menuItems, PRODUCTIVITY_CARD, SIDEBAR_CLASSES, TIP_CARD } from '../assets/dummy'
-import { Lightbulb, Sparkle } from 'lucide-react'
+import { Lightbulb, Menu, Sparkle } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 const Sidebar = ({user, tasks}) => {
 
@@ -96,8 +96,21 @@ const Sidebar = ({user, tasks}) => {
         </div>
     </div>
 
-    {/* MOBILE MENU */}
-    </>
+      {/* MOBILE MENU */}
+      {!mobileOpen && (
+          <button onClick={() => setMobileOpen(true)}
+          className={SIDEBAR_CLASSES.mobileButton}>
+            <Menu className='w-5 h-5'/>
+          </button>
+      )}
+
+      {/* MOBILE DRAWER */}
+      {mobileOpen && (
+        <div className='fixed inset-0 z-40'>
+          <div className={SIDEBAR_CLASSES.mobileDrawerBackdrop} onClick={() => setMobileOpen(false)}></div>
+        </div>
+      )}
+    </>    
   )
 }
 
