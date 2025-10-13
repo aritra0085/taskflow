@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { LINK_CLASSES, menuItems, PRODUCTIVITY_CARD, SIDEBAR_CLASSES } from '../assets/dummy'
-import { Sparkle } from 'lucide-react'
+import { LINK_CLASSES, menuItems, PRODUCTIVITY_CARD, SIDEBAR_CLASSES, TIP_CARD } from '../assets/dummy'
+import { Lightbulb, Sparkle } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 const Sidebar = ({user, tasks}) => {
 
@@ -74,6 +74,25 @@ const Sidebar = ({user, tasks}) => {
           </div>
 
           {renderMenuItems()}
+
+          <div className='mt-auto pt-6 lg:block hidden'>
+            <div className={TIP_CARD.container}>
+              <div className='flex items-center gap-2'>
+                <div className={TIP_CARD.iconWrapper}>
+                  <Lightbulb className='w-5 h-5 text-purple-600'/>
+                </div>
+
+                <div>
+                  <h3  className={TIP_CARD.title}>Pro Tip</h3>
+                  <p className={TIP_CARD.text}>Use keyboard shortcuts to boost productivity!</p>
+                  <a href="https://portfolio-five-gold-71.vercel.app"
+                  target='_blank' className='block mt-2 text-sm text-purple-500 hover:underline'>
+                    Visit Aritra Biswas Portfolio
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
     </div>
     </>
