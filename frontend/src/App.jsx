@@ -73,6 +73,7 @@ const App = () => {
         element={currentUser ? <ProtectedLayout /> : <Navigate to="/login" replace />}
       >
         <Route path="/" element={<Dashboard />} />
+        {/* <Route path='/pending' element */}
       </Route>
 
       <Route
