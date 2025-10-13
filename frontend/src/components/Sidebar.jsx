@@ -22,7 +22,7 @@ const Sidebar = ({user, tasks}) => {
   },[mobileOpen])
 
 
-  const renderMenuItems = (isMobile = false) => {
+  const renderMenuItems = (isMobile = false) => (
     <ul className='space-y-2'>
       {menuItems.map(({text,path,icon}) => (
         <li key={text}>
@@ -41,7 +41,7 @@ const Sidebar = ({user, tasks}) => {
         </li>
       ))}
     </ul>
-  }
+  )
 
   return (
     <>
@@ -72,6 +72,8 @@ const Sidebar = ({user, tasks}) => {
                   style={{width: `${productivity}%`}}/>
             </div>
           </div>
+
+          {renderMenuItems()}
         </div>
     </div>
     </>
