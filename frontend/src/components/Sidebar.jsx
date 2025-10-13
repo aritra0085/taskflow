@@ -95,6 +95,8 @@ const Sidebar = ({user, tasks}) => {
           </div>
         </div>
     </div>
+
+    {/* MOBILE MENU */}
     </>
   )
 }
