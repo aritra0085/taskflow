@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { LINK_CLASSES, menuItems, PRODUCTIVITY_CARD, SIDEBAR_CLASSES, TIP_CARD } from '../assets/dummy'
-import { Lightbulb, Menu, Sparkle } from 'lucide-react'
+import { Lightbulb, Menu,Sparkles, X } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 const Sidebar = ({user, tasks}) => {
 
@@ -56,7 +56,7 @@ const Sidebar = ({user, tasks}) => {
               <div>
                 <h2 className='text-lg font-bold text-gray-800'>Hey, {username}</h2>
                 <p className='text-sm text-purple-500 font-medium flex items-center gap-1'>
-                  <Sparkle className='w-3 h-3'/>Let's crush some tasks!
+                  <Sparkles className='w-3 h-3'/>Let's crush some tasks!
                 </p>
               </div>
           </div>
@@ -107,7 +107,32 @@ const Sidebar = ({user, tasks}) => {
       {/* MOBILE DRAWER */}
       {mobileOpen && (
         <div className='fixed inset-0 z-40'>
-          <div className={SIDEBAR_CLASSES.mobileDrawerBackdrop} onClick={() => setMobileOpen(false)}></div>
+          <div className={SIDEBAR_CLASSES.mobileDrawerBackdrop} onClick={() => setMobileOpen(false)}/>
+
+            <div className={SIDEBAR_CLASSES.mobileDrawer} onClick={(e) => e.stopPropagation()}>
+                <div className='flex justify-between items-center mb-4 border-b pb-2'>
+                  <h2 className='text-lg font-bold text-purple-600'>Menu</h2>
+                  <button onClick={() => setMobileOpen(false)}
+                    className='text-gray-700 hover:text-purple-600'>
+                      <X className='w-5 h-5'/>
+                    </button>
+                </div>
+
+              <div className='flex items-center gap-3 mb-6'>
+                  <div className='w-10 h-10 rounded-full bg-gradient-to-br from-fuchsia-500 to-purple-600 flex items-center justify-center text-white font-bold shadow-md'>
+                    {initial}
+                    </div>
+
+                  <div>
+                    <h2 className='text-lg font-bold mt-16 text-gray-800'>Hey, {username}</h2>
+                    <p className='text-sm text-purple-500 font-medium flex items-center gap-1'>
+                      <Sparkles className='w-3 h-3'/>Let's crush some tasks!
+                    </p>
+                  </div>
+              </div>
+
+              {renderMenuItems(true)}
+            </div>
         </div>
       )}
     </>    
