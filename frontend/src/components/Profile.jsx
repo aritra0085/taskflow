@@ -31,9 +31,22 @@ const Profile = ({setCurrentUser,onLogout}) => {
     const saveProfile = async (e) => {
         e.preventDefault()
         try {
-            
-        } catch (error) {
-            
+            const token = localStorage.getItem('token')
+            const {data} = await axios.put(
+                `${API_URL}/api/user/profile`,
+                {name: profile.name, email: profile.email},
+                {headers: {Authorization: `Bearer ${token}`}}
+            )
+            if(data.success){
+                setCurrentUser((prev) => ({
+                    ...prev,
+                    name: profile.name,
+                     avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(profile.name)}&background=random`
+                }))
+                toast.success("Profile updated successfully")
+            }else toast.error(data.message)
+        } catch (err) {
+                toast.error(err.response?.data?.message || "Failed to update profile")
         }
     }    
 
@@ -69,7 +82,7 @@ const Profile = ({setCurrentUser,onLogout}) => {
                             <div key={name} className={INPUT_WRAPPER}>
                                             <Icon className='text-purple-500 w-5 h-5 mr-2'/>
                             
-                                            <input type={type} placeholder={placeholder} value={profile[name]} onChange={(e) =>setProfile({...formData,[name]:e.target.value})}
+                                            <input type={type} placeholder={placeholder} value={profile[name]} onChange={(e) =>setProfile({...profile,[name]:e.target.value})}
                                             className='w-full focus:outline-none text-sm ' required/>
                                         </div>
                         ))}
