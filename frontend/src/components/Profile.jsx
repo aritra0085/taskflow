@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {toast, ToastContainer} from 'react-toastify'
-import {BACK_BUTTON, SECTION_WRAPPER} from '../assets/dummy'
-import { ChevronLeft, UserCircle } from 'lucide-react'
+import {BACK_BUTTON, FULL_BUTTON, INPUT_WRAPPER, personalFields, SECTION_WRAPPER} from '../assets/dummy'
+import { ChevronLeft, Icon, Save, UserCircle } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const API_URL = 'http://localhost:4000'
 
@@ -11,6 +12,30 @@ const Profile = ({setCurrentUser,onLogout}) => {
     const [profile, setProfile] = useState ({name: '', email: ''})
     const [passwords, setPasswords] = useState({current: '', new: '', confirm: ''})
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        if(!token)return
+            axios
+                 .get(`${API_URL}/api/user/me`,{
+                    headers: {Authorization: `Bearer ${token}`}
+                 })
+                 .then(({data}) => {
+                        if(data.success)
+                            setProfile({name: data.user.name, email: data.user.email})
+                        else toast.error(data.message)
+                 })
+                 .catch(() => toast.error("UNABLE TO LOAD PROFILE")) 
+    },[])
+
+    const saveProfile = async (e) => {
+        e.preventDefault()
+        try {
+            
+        } catch (error) {
+            
+        }
+    }    
 
   return (
     <div className='min-h-screen bg-gray-50'>
@@ -39,6 +64,19 @@ const Profile = ({setCurrentUser,onLogout}) => {
                     </div>
 
                     {/* Personal info name,email */}
+                    <form onSubmit={saveProfile} className='space-y-4'>
+                        {personalFields.map(({name,type,placeholder,icon:Icon}) => (
+                            <div key={name} className={INPUT_WRAPPER}>
+                                            <Icon className='text-purple-500 w-5 h-5 mr-2'/>
+                            
+                                            <input type={type} placeholder={placeholder} value={profile[name]} onChange={(e) =>setProfile({...formData,[name]:e.target.value})}
+                                            className='w-full focus:outline-none text-sm ' required/>
+                                        </div>
+                        ))}
+                        <button className={FULL_BUTTON}>
+                            <Save className='w-4 h-4'/> Save Changes
+                        </button>
+                    </form>
                 </section>
             </div>
 
