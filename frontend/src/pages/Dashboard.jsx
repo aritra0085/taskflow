@@ -26,6 +26,8 @@ const Dashboard = () => {
               Add New Task
             </button>
         </div>
+
+        {/* STATS */}
     </div>
   )
 }
