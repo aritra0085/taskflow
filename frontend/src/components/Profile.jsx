@@ -37,6 +37,8 @@ const Profile = ({setCurrentUser,onLogout}) => {
                         <UserCircle className='text-purple-500 w-5 h-6'/>
                         <h2 className='text-xl font-semibold text-gray-800'>Personal Information</h2>
                     </div>
+
+                    {/* Personal info name,email */}
                 </section>
             </div>
 
