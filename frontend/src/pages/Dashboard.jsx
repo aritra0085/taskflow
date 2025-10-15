@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { ADD_BUTTON, HEADER, WRAPPER } from '../assets/dummy'
-import { HomeIcon, Plus } from 'lucide-react'
+import { ADD_BUTTON, HEADER, ICON_WRAPPER, STAT_CARD, STATS, STATS_GRID, WRAPPER } from '../assets/dummy'
+import { HomeIcon, Icon, Plus } from 'lucide-react'
 
 const API_BASE = 'http://localhost:4000/api/tasks'
 
@@ -28,6 +28,19 @@ const Dashboard = () => {
         </div>
 
         {/* STATS */}
+        <div className={STATS_GRID}>
+            {STATS.map(({
+              key,label,icon:Icon,iconColor,borderColor = "border-purple-100",valueKey,textColor,gradient
+            }) => (
+              <div key={key} className={`${STAT_CARD} ${borderColor}`}>
+                  <div className='flex items-center gap-2 md:gap-3'>
+                      <div className={`${ICON_WRAPPER} ${iconColor}`}>
+                          <Icon className='w-4 h-4 md:w-5 md:h-5'/>
+                      </div>
+                  </div>
+              </div>
+            ))}
+        </div>
     </div>
   )
 }
