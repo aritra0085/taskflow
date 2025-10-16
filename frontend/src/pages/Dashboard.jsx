@@ -4,6 +4,7 @@ import { Calendar, CalendarIcon, Filter, HomeIcon, Icon, Plus } from 'lucide-rea
 import { useOutletContext } from 'react-router-dom'
 import TaskItem from '../components/TaskItem'
 import axios from 'axios'
+import TaskModal from '../components/TaskModal'
 
 const API_BASE = 'http://localhost:4000/api/tasks'
 
@@ -19,7 +20,7 @@ const Dashboard = () => {
     mediumPriority: tasks.filter(t => t.priority === toLowerCase() === 'medium').length,
     highPriority: tasks.filter(t => t.priority === toLowerCase() === 'high').length,
     completed: tasks.filter(t => t.completed === true || t.completed === 1 || (typeof t.completed === 'string' && t.completed.toLowerCase() === 'yes')
-      .length)
+  ).length
   }), [tasks])
 
   //FILTER TASKS
@@ -153,6 +154,10 @@ const Dashboard = () => {
             </div>
         </div>
         {/* MODAL */}
+        <TaskModal isOpen={showModal || !!selectedTask}
+        onClose={() => {setShowModal(false); setSelectedTask(null)}}
+        taskToEdit={selectedTask}
+        onSave={handleTaskSave}/>
     </div>
   )
 }
