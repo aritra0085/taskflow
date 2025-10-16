@@ -103,6 +103,8 @@ const Dashboard = () => {
                 ))}
               </div>
             </div>
+
+            {/* TASK LIST */}
         </div>
     </div>
   )
