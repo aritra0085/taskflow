@@ -20,6 +20,23 @@ const Dashboard = () => {
   }), [tasks])
 
   //FILTER TASKS
+  const filteredTasks = useMemo(() => tasks.filter(task => {
+    const dueDate = new Date(task.dueDate)
+    const today = new Date()
+    const nextWeek = new Date(today); nextWeek.setData(today.getDate() + 7)
+    switch (filter) {
+      case "today":
+        return dueDate.toDateString() === today.toDateString()
+      case "week":
+        return dueDate >= today && dueDate <= nextWeek
+      case "high":
+      case "medium":
+      case "low":
+        return task.priority?.toLowerCase() === filter
+      default:
+        return true          
+    }
+  }), [tasks,filter])
 
   return (
     <div className={WRAPPER}>
