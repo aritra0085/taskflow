@@ -39,6 +39,8 @@ const Dashboard = () => {
     }
   }), [tasks,filter])
 
+  //Saving TASK
+
   return (
     <div className={WRAPPER}>
         {/* HEADER */}
@@ -123,7 +125,10 @@ const Dashboard = () => {
               ):(
                 filteredTasks.map(task => (
                   <TaskItem key={task._id || task.id}
-                    task={task}/>
+                    task={task}
+                    onRefresh={refreshTasks}
+                    showCompleteCheckbox
+                    onEdit={() => {setSelectedTask(task); setShowModal(true)}}/>
                 ))    
               )}
             </div>
