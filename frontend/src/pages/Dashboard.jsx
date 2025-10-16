@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { ADD_BUTTON, FILTER_LABELS, FILTER_OPTIONS, FILTER_WRAPPER, HEADER, ICON_WRAPPER, LABEL_CLASS, SELECT_CLASSES, STAT_CARD, STATS, STATS_GRID, VALUE_CLASS, WRAPPER } from '../assets/dummy'
+import { ADD_BUTTON, FILTER_LABELS, FILTER_OPTIONS, FILTER_WRAPPER, HEADER, ICON_WRAPPER, LABEL_CLASS, SELECT_CLASSES, STAT_CARD, STATS, STATS_GRID, TAB_ACTIVE, TAB_BASE, TAB_INACTIVE, TABS_WRAPPER, VALUE_CLASS, WRAPPER } from '../assets/dummy'
 import { Filter, HomeIcon, Icon, Plus } from 'lucide-react'
 import { useOutletContext } from 'react-router-dom'
 const API_BASE = 'http://localhost:4000/api/tasks'
@@ -95,7 +95,13 @@ const Dashboard = () => {
                 </option>)}
               </select>
 
-              <div></div>
+              <div className={TABS_WRAPPER}>
+                {FILTER_OPTIONS.map(opt => (
+                  <button key={opt} onClick={() => setFilter(opt)} className={`${TAB_BASE} ${filter === opt ? TAB_ACTIVE : TAB_INACTIVE}`}>
+                    {opt.charAt(0).toUpperCase()+opt.slice(1)}
+                  </button>
+                ))}
+              </div>
             </div>
         </div>
     </div>
