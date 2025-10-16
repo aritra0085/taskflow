@@ -1,14 +1,23 @@
-import React, { useState } from 'react'
-import { ADD_BUTTON, HEADER, ICON_WRAPPER, STAT_CARD, STATS, STATS_GRID, WRAPPER } from '../assets/dummy'
+import React, { useMemo, useState } from 'react'
+import { ADD_BUTTON, HEADER, ICON_WRAPPER, STAT_CARD, STATS, STATS_GRID, VALUE_CLASS, WRAPPER } from '../assets/dummy'
 import { HomeIcon, Icon, Plus } from 'lucide-react'
-
+import { useOutletContext } from 'react-router-dom'
 const API_BASE = 'http://localhost:4000/api/tasks'
 
 const Dashboard = () => {
 
+  const {tasks,refreshTasks} = useOutletContext()
   const [showModal, setShowModal] = useState(false)
   const [selectedTask, setSelectedTask] = useState(null)
   const [filter,setFilter] = useState('all')
+  const stats = useMemo(() => ({
+    total: tasks.length,
+    lowPriority: tasks.filter(t => t.priority === toLowerCase() === 'low').length,
+    mediumPriority: tasks.filter(t => t.priority === toLowerCase() === 'medium').length,
+    highPriority: tasks.filter(t => t.priority === toLowerCase() === 'high').length,
+    completed: tasks.filter(t => t.completed === true || t.completed === 1 || (typeof t.completed === 'string' && t.completed.toLowerCase() === 'yes')
+      .length)
+  }), [tasks])
 
   return (
     <div className={WRAPPER}>
@@ -36,6 +45,14 @@ const Dashboard = () => {
                   <div className='flex items-center gap-2 md:gap-3'>
                       <div className={`${ICON_WRAPPER} ${iconColor}`}>
                           <Icon className='w-4 h-4 md:w-5 md:h-5'/>
+                      </div>
+
+                      <div className='min-w-0'>
+                        <p className={`${VALUE_CLASS} ${gradient ?
+                          "bg-gradient-to-r from-fuchsia-500 to-purple-600 bg-clip-text text-transparent"
+                          : textColor}`}>
+                            {stats[valueKey]}
+                        </p>
                       </div>
                   </div>
               </div>
