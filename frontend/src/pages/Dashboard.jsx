@@ -19,6 +19,8 @@ const Dashboard = () => {
       .length)
   }), [tasks])
 
+  //FILTER TASKS
+
   return (
     <div className={WRAPPER}>
         {/* HEADER */}
