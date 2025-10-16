@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
-import { ADD_BUTTON, HEADER, ICON_WRAPPER, STAT_CARD, STATS, STATS_GRID, VALUE_CLASS, WRAPPER } from '../assets/dummy'
-import { HomeIcon, Icon, Plus } from 'lucide-react'
+import { ADD_BUTTON, FILTER_WRAPPER, HEADER, ICON_WRAPPER, LABEL_CLASS, STAT_CARD, STATS, STATS_GRID, VALUE_CLASS, WRAPPER } from '../assets/dummy'
+import { Filter, HomeIcon, Icon, Plus } from 'lucide-react'
 import { useOutletContext } from 'react-router-dom'
 const API_BASE = 'http://localhost:4000/api/tasks'
 
@@ -72,10 +72,21 @@ const Dashboard = () => {
                           : textColor}`}>
                             {stats[valueKey]}
                         </p>
+                        <p className={LABEL_CLASS}>{label}</p>
                       </div>
                   </div>
               </div>
             ))}
+        </div>
+
+        {/* CONTENTS */}
+        <div className='space-y-6'>
+            {/* FILTER */}
+            <div className={FILTER_WRAPPER}>
+              <div className='flex items-center gap-2 min-w-0'>
+                <Filter className='w-5 h-5 text-purple-500 shrink-0'/>
+              </div>
+            </div>
         </div>
     </div>
   )
