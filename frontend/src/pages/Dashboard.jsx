@@ -1,8 +1,10 @@
-import React, { useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { ADD_BUTTON, EMPTY_STATE, FILTER_LABELS, FILTER_OPTIONS, FILTER_WRAPPER, HEADER, ICON_WRAPPER, LABEL_CLASS, SELECT_CLASSES, STAT_CARD, STATS, STATS_GRID, TAB_ACTIVE, TAB_BASE, TAB_INACTIVE, TABS_WRAPPER, VALUE_CLASS, WRAPPER } from '../assets/dummy'
 import { Calendar, CalendarIcon, Filter, HomeIcon, Icon, Plus } from 'lucide-react'
 import { useOutletContext } from 'react-router-dom'
 import TaskItem from '../components/TaskItem'
+import axios from 'axios'
+
 const API_BASE = 'http://localhost:4000/api/tasks'
 
 const Dashboard = () => {
@@ -40,6 +42,16 @@ const Dashboard = () => {
   }), [tasks,filter])
 
   //Saving TASK
+  const handleTaskSave = useCallback(async (taskData) => {
+    try {
+        if (taskData.id) await axios.put(`${API_BASE}/${taskData.id}/gp`,taskData)
+        refreshTasks()
+        setShowModal(false)
+        setSelectedTask(null)  
+    } catch (error) {
+        console.error("Error saving task:", error)
+    }
+  }, [refreshTasks])
 
   return (
     <div className={WRAPPER}>
