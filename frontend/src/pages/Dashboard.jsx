@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react'
-import { ADD_BUTTON, FILTER_LABELS, FILTER_OPTIONS, FILTER_WRAPPER, HEADER, ICON_WRAPPER, LABEL_CLASS, SELECT_CLASSES, STAT_CARD, STATS, STATS_GRID, TAB_ACTIVE, TAB_BASE, TAB_INACTIVE, TABS_WRAPPER, VALUE_CLASS, WRAPPER } from '../assets/dummy'
-import { Filter, HomeIcon, Icon, Plus } from 'lucide-react'
+import { ADD_BUTTON, EMPTY_STATE, FILTER_LABELS, FILTER_OPTIONS, FILTER_WRAPPER, HEADER, ICON_WRAPPER, LABEL_CLASS, SELECT_CLASSES, STAT_CARD, STATS, STATS_GRID, TAB_ACTIVE, TAB_BASE, TAB_INACTIVE, TABS_WRAPPER, VALUE_CLASS, WRAPPER } from '../assets/dummy'
+import { Calendar, CalendarIcon, Filter, HomeIcon, Icon, Plus } from 'lucide-react'
 import { useOutletContext } from 'react-router-dom'
+import TaskItem from '../components/TaskItem'
 const API_BASE = 'http://localhost:4000/api/tasks'
 
 const Dashboard = () => {
@@ -105,6 +106,27 @@ const Dashboard = () => {
             </div>
 
             {/* TASK LIST */}
+            <div className='space-y-4'>
+              {filteredTasks.length === 0 ? (
+                <div className={EMPTY_STATE.wrapper}>
+                  <div className={EMPTY_STATE.iconWrapper}>
+                    <CalendarIcon className='w-8 h-8 text-purple-500'/>
+                    </div>
+                    <h3 className='text-lg font-semibold text-gray-800 mb-2'>
+                      No task found
+                    </h3>
+                    <p className='text-sm text-gray-500 mb-4'>{filter === "all" ? "Create your first task to get started" : "No tasks match this filter"}</p>
+                    <button onClick={() => setShowModal(true)} className={EMPTY_STATE.btn}>
+                      Add New Task
+                    </button>
+                 </div> 
+              ):(
+                filteredTasks.map(task => (
+                  <TaskItem key={task._id || task.id}
+                    task={task}/>
+                ))    
+              )}
+            </div>
         </div>
     </div>
   )
