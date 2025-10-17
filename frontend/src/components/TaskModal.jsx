@@ -1,6 +1,6 @@
 import React,{useCallback, useEffect, useState} from 'react'
 import { DEFAULT_TASK } from '../assets/dummy'
-import { PlusCircle, Save, X } from 'lucide-react'
+import { AlignLeft, PlusCircle, Save, X } from 'lucide-react'
 
 const API_BASE = 'http://localhost:4000/api/tasks'
 
@@ -98,6 +98,18 @@ const TaskModal = ({isOpen, onClose, taskToEdit, onSave, onLogout}) => {
             <div>
                   <label className='block text-sm font-medium text-gray-700 mb-1'>
                      Task Title
+                   </label>
+                   <div className='flex items-center border border-purple-100 rounded-lg px-3 py-2.5 focus-within:ring-2 focus-within:ring-purple-500 focus-within:border-purple-500 transition-all duration-200'>
+                      <input type='text' name='title' required value={taskData.title}
+                      onChange={handleSubmit} className='w-full focus:outline-none text-sm'
+                      placeholder='Enter task title'/>
+                   </div>
+            </div>
+
+            <div>
+              <label className='flex items-center gap-1 text-sm font-medium text-gray-700 mb-1'>
+                     <AlignLeft className='w-4 h-4 text-purple-500'/>
+                     Description
                    </label>
             </div>
           </form>
