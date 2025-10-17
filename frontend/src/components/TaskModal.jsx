@@ -58,11 +58,25 @@ const TaskModal = ({isOpen, onClose, taskToEdit, onSave, onLogout}) => {
            const resp = await fetch(url, {
             method: isEdit ? 'PUT' : 'POST',
             headers: getHeaders(),
-           })
-      } catch (error) {
-        
+            body: JSON.stringify(taskData),
+           });
+            if(!resp.ok){
+              if(resp.status ===401) return onLogout?.();
+              const err = await resp.json();
+              throw new Error(err.message || 'Failed to save task')
+            }
+            const saved = await resp.json();
+            onSave?.(saved);
+            onClose?.();
       }
-    })
+       catch (error) {
+            console.error(err)
+            setError(err.message || 'An unexpected error occurred');
+      }
+      finally {
+        setLoading(false)
+      }
+    },[taskData, getHeaders, onSave, onClose, onLogout])
 
   return (
     <div className='fixed inset-0 backdrop-blur-sm bg-black/20 z-50 flex items-center justify-center p-4'>
@@ -79,6 +93,14 @@ const TaskModal = ({isOpen, onClose, taskToEdit, onSave, onLogout}) => {
             </button>
           </div>
           {/* FORM TO FILL TO CREATE A TASK*/}
+          <form onSubmit={handleSubmit} className='space-y-4'>
+            {error && <div className='text-sm text-red-600 bg-red-50 p-3 rounded-lg border border-red-100'>{error}</div>}
+            <div>
+                  <label className='block text-sm font-medium text-gray-700 mb-1'>
+                     Task Title
+                   </label>
+            </div>
+          </form>
       </div>
     </div>
   )
