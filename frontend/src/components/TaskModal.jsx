@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React,{useCallback, useEffect, useState} from 'react'
 import { DEFAULT_TASK } from '../assets/dummy'
 import { PlusCircle, Save, X } from 'lucide-react'
 
@@ -28,6 +28,23 @@ const TaskModal = ({isOpen, onClose, taskToEdit, onSave, onLogout}) => {
         }
         setError(null)
     }, [isOpen, taskToEdit])
+
+    const handleSubmit = useCallback(async (e) => {
+      e.preventDefault();
+      if(taskData.dueDate < today) {
+        setError('Due date cannot be in the past.');
+        return;
+      }
+      setLoading(true)
+      setError(null)
+
+      try {
+        
+      } catch (error) {
+        
+      }
+    })
+
   return (
     <div className='fixed inset-0 backdrop-blur-sm bg-black/20 z-50 flex items-center justify-center p-4'>
       <div className='bg-white border border-purple-100 rounded-xl max-w-md w-full shadow-lg relative p-6 animate-fadeIn'>
