@@ -1,6 +1,6 @@
 import React,{useCallback, useEffect, useState} from 'react'
-import { DEFAULT_TASK } from '../assets/dummy'
-import { AlignLeft, PlusCircle, Save, X } from 'lucide-react'
+import { baseControlClasses, DEFAULT_TASK, priorityStyles } from '../assets/dummy'
+import { AlignLeft, Flag, PlusCircle, Save, X } from 'lucide-react'
 
 const API_BASE = 'http://localhost:4000/api/tasks'
 
@@ -111,6 +111,26 @@ const TaskModal = ({isOpen, onClose, taskToEdit, onSave, onLogout}) => {
                      <AlignLeft className='w-4 h-4 text-purple-500'/>
                      Description
                    </label>
+
+                   <textarea name='description' rows="3"
+                   onChange={handleChange} value={taskData.description}
+                   className={baseControlClasses} placeholder='Add details about your task'/>
+            </div>
+
+            <div className='grid grid-cols-2 gap-4'>
+                  <div>
+                      <label className='flex items-center gap-1 text-sm font-medium text-gray-700 mb-1'>
+                        <Flag className='w-4 h-4 text-purple-500'/>
+                        Priority
+                      </label>
+                      <select name='priority' value={taskData.priority}
+                      onChange={handleChange}
+                      className={`${baseControlClasses} ${priorityStyles[taskData.priority]}`}>
+                        <option>Low</option>
+                        <option>Medium</option>
+                        <option>High</option>
+                      </select>
+                  </div>
             </div>
           </form>
       </div>
