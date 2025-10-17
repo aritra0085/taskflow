@@ -80,7 +80,7 @@ const TaskModal = ({isOpen, onClose, taskToEdit, onSave, onLogout}) => {
       }
     },[taskData, today ,getHeaders, onSave, onClose, onLogout])
 
-    
+    if(!isOpen) return null;
 
   return (
     <div className='fixed inset-0 backdrop-blur-sm bg-black/20 z-50 flex items-center justify-center p-4'>
