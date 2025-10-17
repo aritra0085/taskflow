@@ -10,10 +10,11 @@ const TaskModal = ({isOpen, onClose, taskToEdit, onSave, onLogout}) => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
     const today = new Date().toISOString().split('T')[0];
+    
     useEffect(() => {
         if(!isOpen) return;
         if(taskToEdit){
-            const normalized = taskToEdit.completed ==='yes' || taskToEdit.completed === true ? 'Yes' :  'No';
+            const normalized = taskToEdit.completed ==='Yes' || taskToEdit.completed === true ? 'Yes' :  'No';
             setTaskData({
                 ...DEFAULT_TASK,
                 title: taskToEdit.title || '',
@@ -46,10 +47,10 @@ const TaskModal = ({isOpen, onClose, taskToEdit, onSave, onLogout}) => {
 
     const handleSubmit = useCallback(async (e) => {
       e.preventDefault();
-      if(taskData.dueDate < today) {
-        setError('Due date cannot be in the past.');
-        return;
-      }
+        if (new Date(taskData.dueDate) < new Date(today)) {
+           setError('Due date cannot be in the past.');
+           return;
+       }
       setLoading(true)
       setError(null)
 
@@ -62,7 +63,7 @@ const TaskModal = ({isOpen, onClose, taskToEdit, onSave, onLogout}) => {
             body: JSON.stringify(taskData),
            });
             if(!resp.ok){
-              if(resp.status ===401) return onLogout?.();
+              if(resp.status === 401) return onLogout?.();
               const err = await resp.json();
               throw new Error(err.message || 'Failed to save task')
             }
@@ -78,6 +79,8 @@ const TaskModal = ({isOpen, onClose, taskToEdit, onSave, onLogout}) => {
         setLoading(false)
       }
     },[taskData, today ,getHeaders, onSave, onClose, onLogout])
+
+    
 
   return (
     <div className='fixed inset-0 backdrop-blur-sm bg-black/20 z-50 flex items-center justify-center p-4'>
@@ -102,7 +105,7 @@ const TaskModal = ({isOpen, onClose, taskToEdit, onSave, onLogout}) => {
                    </label>
                    <div className='flex items-center border border-purple-100 rounded-lg px-3 py-2.5 focus-within:ring-2 focus-within:ring-purple-500 focus-within:border-purple-500 transition-all duration-200'>
                       <input type='text' name='title' required value={taskData.title}
-                      onChange={handleSubmit} className='w-full focus:outline-none text-sm'
+                      onChange={handleChange} className='w-full focus:outline-none text-sm'
                       placeholder='Enter task title'/>
                    </div>
             </div>
@@ -158,6 +161,16 @@ const TaskModal = ({isOpen, onClose, taskToEdit, onSave, onLogout}) => {
                         ))}
                       </div>
             </div>
+
+            <button type='submit' disabled={loading}
+            className='w-full bg-gradient-to-r from-fuchsia-500 to-purple-600 text-white
+            font-medium py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 disabled:opacity-50 hover:shadow-md transition-all duration-200'>
+              {loading ? 'Saving...' : (taskData.id ? <>
+                <Save className='w-4 h-4'/>Update Task
+              </> : <>
+              <PlusCircle className='w-4 h-4'/>Create Task
+              </>)}
+            </button>
           </form>
       </div>
     </div>

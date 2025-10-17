@@ -14,20 +14,21 @@ const Dashboard = () => {
   const [showModal, setShowModal] = useState(false)
   const [selectedTask, setSelectedTask] = useState(null)
   const [filter,setFilter] = useState('all')
+
   const stats = useMemo(() => ({
     total: tasks.length,
-    lowPriority: tasks.filter(t => t.priority === toLowerCase() === 'low').length,
-    mediumPriority: tasks.filter(t => t.priority === toLowerCase() === 'medium').length,
-    highPriority: tasks.filter(t => t.priority === toLowerCase() === 'high').length,
-    completed: tasks.filter(t => t.completed === true || t.completed === 1 || (typeof t.completed === 'string' && t.completed.toLowerCase() === 'yes')
-  ).length
+    lowPriority: tasks.filter(t => t.priority?.toLowerCase() === 'low').length,
+    mediumPriority: tasks.filter(t => t.priority?.toLowerCase() === 'medium').length,
+    highPriority: tasks.filter(t => t.priority?.toLowerCase() === 'high').length,
+    completed: tasks.filter(t => t.completed === true || t.completed === 1 || (typeof t.completed === 'string' && t.completed.toLowerCase() === 'yes'
+    ).length)
   }), [tasks])
 
   //FILTER TASKS
   const filteredTasks = useMemo(() => tasks.filter(task => {
     const dueDate = new Date(task.dueDate)
     const today = new Date()
-    const nextWeek = new Date(today); nextWeek.setData(today.getDate() + 7)
+    const nextWeek = new Date(today); nextWeek.setDate(today.getDate() + 7)
     switch (filter) {
       case "today":
         return dueDate.toDateString() === today.toDateString()
