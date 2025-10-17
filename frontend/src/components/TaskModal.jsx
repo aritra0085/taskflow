@@ -34,6 +34,15 @@ const TaskModal = ({isOpen, onClose, taskToEdit, onSave, onLogout}) => {
       setTaskData(prev => ({...prev,[name]: value}))
     }, [])
 
+    const getHeaders = useCallback(() => {
+      const token = localStorage.getItem('token');
+      if(!token) throw new Error('No auth token found')
+      return {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }
+    }, [])
+
     const handleSubmit = useCallback(async (e) => {
       e.preventDefault();
       if(taskData.dueDate < today) {
@@ -44,7 +53,12 @@ const TaskModal = ({isOpen, onClose, taskToEdit, onSave, onLogout}) => {
       setError(null)
 
       try {
-        
+           const isEdit = Boolean(taskData.id);
+           const url = isEdit ? `${API_BASE}/${taskData.id}/gp` : `${API_BASE}/gp`;
+           const resp = await fetch(url, {
+            method: isEdit ? 'PUT' : 'POST',
+            headers: getHeaders(),
+           })
       } catch (error) {
         
       }
