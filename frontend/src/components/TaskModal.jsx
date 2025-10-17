@@ -29,6 +29,11 @@ const TaskModal = ({isOpen, onClose, taskToEdit, onSave, onLogout}) => {
         setError(null)
     }, [isOpen, taskToEdit])
 
+    const handleChange = useCallback((e) => {
+      const {name, value} = e.target;
+      setTaskData(prev => ({...prev,[name]: value}))
+    }, [])
+
     const handleSubmit = useCallback(async (e) => {
       e.preventDefault();
       if(taskData.dueDate < today) {
