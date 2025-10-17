@@ -69,7 +69,7 @@ const TaskModal = ({isOpen, onClose, taskToEdit, onSave, onLogout}) => {
             onSave?.(saved);
             onClose?.();
       }
-       catch (error) {
+       catch (err) {
             console.error(err)
             setError(err.message || 'An unexpected error occurred');
       }
