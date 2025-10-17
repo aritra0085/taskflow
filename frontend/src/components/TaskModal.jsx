@@ -42,6 +42,7 @@ const TaskModal = ({isOpen, onClose, taskToEdit, onSave, onLogout}) => {
                     <X className='w-5 h-5'/>
             </button>
           </div>
+          {/* FORM TO FILL TO CREATE A TASK*/}
       </div>
     </div>
   )
