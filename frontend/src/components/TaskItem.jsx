@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getPriorityColor, MENU_OPTIONS, TI_CLASSES } from '../assets/dummy'
 import { CheckCircle2, MoreVertical } from 'lucide-react'
 import axios from 'axios'
+import { updateTask } from '../../../backend/controllers/taskController'
 
 const API_BASE = 'http://localhost:4000/api/tasks'
 
@@ -53,6 +54,17 @@ const TaskItem = ({task,onRefresh,onLogout,showCompleteCheckbox = true }) => {
   const handleDelete = async () => {
     try {
       await axios.delete(`${API_BASE}/${task._id}/gp`, {headers: getAuthHeaders()})
+      onRefresh?.()
+    } catch (err) {
+      if(err.response?.status === 401)onLogout?.()
+    }
+  }
+
+  const handleSave = async (updateTask) => {
+    try {
+      const payload = (({ title, description, priority, dueDate, completed }) => ({ title, description, priority, dueDate, completed }))(updateTask);
+      await axios.put(`${API_BASE}/${task._id}/gp`, payload, {headers: getAuthHeaders()})
+      setShowEditModal(false)
       onRefresh?.()
     } catch (err) {
       if(err.response?.status === 401)onLogout?.()
