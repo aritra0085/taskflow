@@ -50,6 +50,15 @@ const TaskItem = ({task,onRefresh,onLogout,showCompleteCheckbox = true }) => {
     if(action === 'delete') handleDelete()  
   }
 
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`${API_BASE}/${task._id}/gp`, {headers: getAuthHeaders()})
+      onRefresh?.()
+    } catch (err) {
+      if(err.response?.status === 401)onLogout?.()
+    }
+  }
+
   const progress = subtasks.length ? (subtasks.filter(st => st.completed).length / subtasks.length) * 100 : 0
 
   return (
