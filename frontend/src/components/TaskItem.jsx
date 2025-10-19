@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TI_CLASSES } from '../assets/dummy'
 
 const API_BASE = 'http://localhost:4000/api/tasks'
@@ -11,6 +11,22 @@ const TaskItem = ({task,onRefresh,onLogout,showCompleteCheckbox = true }) => {
       typeof task.completed === 'string' ? task.completed.toLowerCase() : task.completed
     )
   )
+  const [showEditModal, setShowEditModal] = useState(false)
+  const [subtasks, setSubtasks] = useState(task.subtasks || [])
+
+  useEffect(() => {
+    setIsCompleted(
+      [true, 1, 'yes'].includes(
+        typeof task.completed === 'string' ? task.completed.toLowerCase() : task.completed
+      )
+    )
+  }, [task.completed])
+
+  const getAuthHeaders = () => {
+    const token = localStorage.getItem('token')
+    if (!token) throw new Error('No auth token found')
+      return{Authorization: `Bearer ${token}`}
+  }
 
   return (
        <>
