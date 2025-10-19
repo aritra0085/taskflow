@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { getPriorityColor, TI_CLASSES } from '../assets/dummy'
-import { CheckCircle2 } from 'lucide-react'
+import { getPriorityColor, MENU_OPTIONS, TI_CLASSES } from '../assets/dummy'
+import { CheckCircle2, MoreVertical } from 'lucide-react'
 import axios from 'axios'
 
 const API_BASE = 'http://localhost:4000/api/tasks'
@@ -44,6 +44,12 @@ const TaskItem = ({task,onRefresh,onLogout,showCompleteCheckbox = true }) => {
     }
   }
 
+  const handleAction = (action) => {
+    setShowMenu(false)
+    if(action === 'edit') setShowEditModal(true)
+    if(action === 'delete') handleDelete()  
+  }
+
   const progress = subtasks.length ? (subtasks.filter(st => st.completed).length / subtasks.length) * 100 : 0
 
   return (
@@ -68,6 +74,26 @@ const TaskItem = ({task,onRefresh,onLogout,showCompleteCheckbox = true }) => {
                                 {task.priority}
                             </span>
                       </div>
+
+                      {task.description && <p className={TI_CLASSES.description}></p>}
+                  </div>
+              </div>
+              <div className={TI_CLASSES.rightContainer}>
+                  <div className='relative'>
+                      <button onClick={() => setShowMenu(!showMenu)} className={TI_CLASSES.menuButton}>   
+                        <MoreVertical className='w-4 h-4 sm:w-5 sm:h-5' size={18}/>   
+                      </button>
+
+                      {showMenu && (
+                        <div className={TI_CLASSES.menuDropdown}>
+                          {MENU_OPTIONS.map(opt => (
+                            <button key={opt.action} onClick={() => handleAction(opt.action)}
+                            className='w-full px-3 sm:px-4 py-2 text-left text-xs sm:text-sm hover:bg-purple-500 flex items-center gap-2 transition-colors duration-200'>
+                              {opt.icon}{opt.label}
+                            </button>
+                          ))}
+                        </div>
+                      )}
                   </div>
               </div>
           </div>       
