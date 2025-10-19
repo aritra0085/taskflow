@@ -65,7 +65,7 @@ const TaskItem = ({task,onRefresh,onLogout,showCompleteCheckbox = true }) => {
                             </h3>
                             <span className={`${TI_CLASSES.priorityBadge}
                               ${getPriorityColor(task.priority)}`}>
-
+                                {task.priority}
                             </span>
                       </div>
                   </div>
