@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getPriorityColor, MENU_OPTIONS, TI_CLASSES } from '../assets/dummy'
 import { CheckCircle2, MoreVertical } from 'lucide-react'
 import axios from 'axios'
-import { updateTask } from '../../../backend/controllers/taskController'
+import { isToday } from 'date-fns'
 
 const API_BASE = 'http://localhost:4000/api/tasks'
 
@@ -60,9 +60,9 @@ const TaskItem = ({task,onRefresh,onLogout,showCompleteCheckbox = true }) => {
     }
   }
 
-  const handleSave = async (updateTask) => {
+  const handleSave = async (updatedTask) => {
     try {
-      const payload = (({ title, description, priority, dueDate, completed }) => ({ title, description, priority, dueDate, completed }))(updateTask);
+      const payload = (({ title, description, priority, dueDate, completed }) => ({ title, description, priority, dueDate, completed }))(updatedTask);
       await axios.put(`${API_BASE}/${task._id}/gp`, payload, {headers: getAuthHeaders()})
       setShowEditModal(false)
       onRefresh?.()
@@ -115,6 +115,12 @@ const TaskItem = ({task,onRefresh,onLogout,showCompleteCheckbox = true }) => {
                           ))}
                         </div>
                       )}
+                  </div>
+
+                  <div>
+                    <div className={`${TI_CLASSES.dateRow} ${task.dueDate && isToday(new Date(task.dueDate)) ? 'text-fuchsia-600' : 'text-gray-500'}`}>
+
+                    </div>
                   </div>
               </div>
           </div>       
