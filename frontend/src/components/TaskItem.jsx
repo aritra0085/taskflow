@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getPriorityColor, MENU_OPTIONS, TI_CLASSES } from '../assets/dummy'
-import { CheckCircle2, MoreVertical } from 'lucide-react'
+import { Calendar, CheckCircle2, MoreVertical } from 'lucide-react'
 import axios from 'axios'
 import { isToday } from 'date-fns'
 
@@ -119,7 +119,7 @@ const TaskItem = ({task,onRefresh,onLogout,showCompleteCheckbox = true }) => {
 
                   <div>
                     <div className={`${TI_CLASSES.dateRow} ${task.dueDate && isToday(new Date(task.dueDate)) ? 'text-fuchsia-600' : 'text-gray-500'}`}>
-
+                      <Calendar className='w-3.5 h-3.5'/>
                     </div>
                   </div>
               </div>
