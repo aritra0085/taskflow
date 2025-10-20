@@ -120,6 +120,7 @@ const TaskItem = ({task,onRefresh,onLogout,showCompleteCheckbox = true }) => {
                   <div>
                     <div className={`${TI_CLASSES.dateRow} ${task.dueDate && isToday(new Date(task.dueDate)) ? 'text-fuchsia-600' : 'text-gray-500'}`}>
                       <Calendar className='w-3.5 h-3.5'/>
+                      {task.dueDate ? (isToday(new Date(task.dueDate)) ? 'Today' : format(new Date(task.dueDate), 'MMM dd')) : '-'}
                     </div>
                   </div>
               </div>
