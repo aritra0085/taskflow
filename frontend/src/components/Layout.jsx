@@ -163,8 +163,15 @@ const Layout = ({ onLogout, user }) => {
                   </span>
                 </div>
 
-                <div className='relative pt-1'>
-                  
+                <div className="relative pt-1">
+                  <div className="flex gap-1.5 items-center">
+                    <div className="flex h-2 sm:h-3 bg-purple-100 rounded-full overflow-hidden w-full">
+                      <div
+                        className="h-full bg-gradient-to-r from-fuchsia-500 to-purple-600 transition-all duration-500"
+                        style={{ width: `${stats.completionPercentage}%` }}
+                      ></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
