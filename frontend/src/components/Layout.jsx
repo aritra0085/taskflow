@@ -149,6 +149,8 @@ const Layout = ({ onLogout, user }) => {
                   icon={<Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-500" />}
                 />
               </div>
+
+              <hr className='my-3 sm:my-4 border-purple-100'/>
             </div>
 
             {/* Recent Activity */}
