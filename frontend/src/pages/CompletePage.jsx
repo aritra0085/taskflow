@@ -78,6 +78,7 @@ const CompletePage = () => {
           </div>
         </div>
       </div>
+      {/* TASK  LIST */}
     </div>
   )
 }
