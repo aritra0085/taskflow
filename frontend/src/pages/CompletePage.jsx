@@ -2,6 +2,7 @@ import React, {useMemo, useState} from 'react'
 import { CT_CLASSES, SORT_OPTIONS } from '../assets/dummy'
 import { CheckCircle2, Filter } from 'lucide-react'
 import { useOutletContext } from 'react-router-dom';
+import TaskItem from '../components/TaskItem';
 const CompletePage = () => {
 
   const {tasks, refreshTasks } = useOutletContext();
@@ -79,6 +80,29 @@ const CompletePage = () => {
         </div>
       </div>
       {/* TASK  LIST */}
+      <div className={CT_CLASSES.list}>
+        {sortedCompletedTasks.length === 0 ? (
+          <div className={CT_CLASSES.emptyState}>
+            <div className={CT_CLASSES.emptyIconWrapper}>
+              <CheckCircle2 className='w-6 h-6 md:w-8 md:h-8 text-purple-500'/>
+            </div>
+            <h3 className={CT_CLASSES.emptyTitle}>
+              No Completed tasks yet!
+            </h3>
+            <p className={CT_CLASSES.emptyText}>
+              Complete some tasks and they'll appear here
+            </p>
+          </div>
+        ) : (
+          sortedCompletedTasks.map(task => (
+            <TaskItem key={task._id || task.id}
+            task={task}
+            onRefresh={refreshTasks}
+            showCompleteCheckbox={false}
+            className='opacity-90 hover:opacity-100 transition-opacity text-sm md:text-base'/>
+          ))
+        )}
+      </div>
     </div>
   )
 }
