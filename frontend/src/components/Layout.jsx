@@ -158,7 +158,12 @@ const Layout = ({ onLogout, user }) => {
                     <Circle className='w-2.5 h-2.5 sm:w-3 sm:h-3 text-purple-500 fill-purple-500'/>
                     Task Progress
                   </span>
+                  <span className='text-xs bg-purple-100 text-purple-700 px-1.5 py-0.5 sm:px-2 rounded-full'>
+                    {stats.completedTasks}/ {stats.totalCount}
+                  </span>
                 </div>
+
+                <div></div>
               </div>
             </div>
 
