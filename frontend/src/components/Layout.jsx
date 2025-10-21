@@ -151,6 +151,15 @@ const Layout = ({ onLogout, user }) => {
               </div>
 
               <hr className='my-3 sm:my-4 border-purple-100'/>
+
+              <div className='space-y-2 sm:space-y-3'>
+                <div className='flex items-center justify-betweeen text-gray-700'>
+                  <span className='text-xs sm:text-sm font-medium flex items-center gap-1.5'>
+                    <Circle className='w-2.5 h-2.5 sm:w-3 sm:h-3 text-purple-500 fill-purple-500'/>
+                    Task Progress
+                  </span>
+                </div>
+              </div>
             </div>
 
             {/* Recent Activity */}
