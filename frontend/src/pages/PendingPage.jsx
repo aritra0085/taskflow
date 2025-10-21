@@ -1,4 +1,4 @@
-import { ListCheck } from 'lucide-react'
+import { Filter, ListCheck } from 'lucide-react'
 import React, { useMemo, useState } from 'react'
 import { layoutClasses } from '../assets/dummy'
 import {useOutletContext} from 'react-router-dom'
@@ -38,9 +38,16 @@ const PendingPage = () => {
             <ListCheck className='text-purple-500'/> Pending Tasks
           </h1>
           <p className='text-sm text-gray-500 mt-1 ml-7'>
-            {sortedPendingTasks.length} task{sortedPendingTasks.length !== 1 && 's '}
+            {sortedPendingTasks.length} task{sortedPendingTasks.length !== 1 && 's'} {' '}
             needing your attention
           </p>
+        </div>
+
+        <div className={layoutClasses.sortBox}>
+          <div className='flex items-center gap-2 text-gray-700 font-medium'>
+            <Filter className='w-4 h-4 text-purple-500'/>
+            <span className='text-sm'>Sort by:</span>
+          </div>
         </div>
       </div>
     </div>
