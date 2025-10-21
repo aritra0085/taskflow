@@ -55,8 +55,17 @@ const CompletePage = () => {
             {/* MOBILE DROPDOWN */}
             <select value={sortBy} onChange={e => setSortBy(e.target.value)}
               className={CT_CLASSES.select}>
-                
+                {SORT_OPTIONS.map(opt => (
+                  <option key={opt.id} value={opt.id}>
+                    {opt.label}
+                    {opt.id === 'newest' ? 'First' : ''}
+                  </option>
+                ))}
               </select>
+              {/* DESKSTOP BUTTONs */}
+              <div>
+
+              </div>
           </div>
         </div>
       </div>
