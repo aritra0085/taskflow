@@ -51,6 +51,8 @@ const CompletePage = () => {
               <Filter className='w-4 h-4 text-purple-500'/>
               <span className='text-xs md:text-sm'>Sort by:</span>
             </div>
+
+            {/* MOBILE DROPDOWN */}
           </div>
         </div>
       </div>
