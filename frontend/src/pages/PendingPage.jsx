@@ -1,10 +1,9 @@
+import { Dice1 } from 'lucide-react'
 import React from 'react'
 
 const PendingPage = () => {
   return (
-    <div>
-      p
-    </div>
+    <Div></Div>
   )
 }
 
