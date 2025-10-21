@@ -85,20 +85,30 @@ const TaskItem = ({task,onRefresh,onLogout,showCompleteCheckbox = true }) => {
                     </button>
                   )}
 
-                  <div className='flex-1 min-w-0'>
-                      <div className='flex items-baseline gap-2 mb-1 flex-wrap'>  
-                          <h3 className={`${TI_CLASSES.titleBase}
-                            ${isCompleted ? 'text-gray-400 line-through' : 'text-gray-800'}`}>
-                              {task.title}
-                            </h3>
-                            <span className={`${TI_CLASSES.priorityBadge}
-                              ${getPriorityColor(task.priority)}`}>
-                                {task.priority}
-                            </span>
-                      </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-baseline gap-2 mb-1 flex-wrap">  
+                      <h3
+                        className={`${TI_CLASSES.titleBase} ${
+                          isCompleted ? 'text-gray-400 line-through' : 'text-gray-800'
+                        }`}
+                      >
+                        {task.title}
+                      </h3>
 
-                      {task.description && <p className={TI_CLASSES.description}></p>}
+                      <span
+                        className={`${TI_CLASSES.priorityBadge} ${getPriorityColor(task.priority)}`}
+                      >
+                        {task.priority}
+                      </span>
+                    </div>
+
+                    {task.description && (
+                      <p className={TI_CLASSES.description}>
+                        {task.description}
+                      </p>
+                    )}
                   </div>
+
               </div>
               <div className={TI_CLASSES.rightContainer}>
                   <div className='relative'>
