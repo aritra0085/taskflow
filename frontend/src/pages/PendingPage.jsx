@@ -1,5 +1,5 @@
 import { ListCheck } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { layoutClasses } from '../assets/dummy'
 import {useOutletContext} from 'react-router-dom'
 
@@ -15,8 +15,20 @@ const PendingPage = () => {
   const getHeaders = () => {
     const token = localStorage.getItem('token')
     if (!token) throw new Error('No auth token found')
-      return{'Content-Type':'application/json',Authorization: `Bearer ${token}`}
+      return {'Content-Type':'application/json',Authorization: `Bearer ${token}`}
   }
+
+  const sortedPendingTasks = useMemo(() => {
+    const filtered = tasks.filter(
+      (t) => !t.completed || (typeof t.completed === 'string' && t.completed.toLowerCase() === 'no')
+    )
+    return filtered.sort((a, b) => {
+      if (sortBy === 'newest') return new Date(b.createdAt) - new Date(a.createdAt);
+      if (sortBy === 'oldest') return new Date(a.createdAt) - new Date(b.createdAt);
+      const order = {high: 3, medium: 2, low: 1};
+      return order[b.priority.toLowerCase()] - order[a.priority.toLowerCase()]
+    })
+  }, [tasks, sortBy])
 
   return (
     <div className={layoutClasses.container}>
