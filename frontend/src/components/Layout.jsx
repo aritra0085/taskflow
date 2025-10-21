@@ -153,13 +153,13 @@ const Layout = ({ onLogout, user }) => {
               <hr className='my-3 sm:my-4 border-purple-100'/>
 
               <div className='space-y-2 sm:space-y-3'>
-                <div className='flex items-center justify-betweeen text-gray-700'>
+                <div className='flex items-center justify-between text-gray-700'>
                   <span className='text-xs sm:text-sm font-medium flex items-center gap-1.5'>
                     <Circle className='w-2.5 h-2.5 sm:w-3 sm:h-3 text-purple-500 fill-purple-500'/>
                     Task Progress
                   </span>
                   <span className='text-xs bg-purple-100 text-purple-700 px-1.5 py-0.5 sm:px-2 rounded-full'> 
-                    {stats.completedTasks}/ {stats.totalCount}
+                    {stats.completedTasks}/{stats.totalCount}
                   </span>
                 </div>
 
@@ -168,8 +168,8 @@ const Layout = ({ onLogout, user }) => {
                     <div className="flex h-2 sm:h-3 bg-purple-100 rounded-full overflow-hidden w-full">
                       <div
                         className="h-full bg-gradient-to-r from-fuchsia-500 to-purple-600 transition-all duration-500"
-                        style={{ width: `${stats.completionPercentage}%` }}
-                      ></div>
+                        style={{ width: `${stats.completionPercentage}%` }}/
+                      >
                     </div>
                   </div>
                 </div>
