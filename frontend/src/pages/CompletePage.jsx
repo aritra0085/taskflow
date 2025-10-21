@@ -53,6 +53,10 @@ const CompletePage = () => {
             </div>
 
             {/* MOBILE DROPDOWN */}
+            <select value={sortBy} onChange={e => setSortBy(e.target.value)}
+              className={CT_CLASSES.select}>
+                
+              </select>
           </div>
         </div>
       </div>
