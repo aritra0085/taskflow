@@ -43,6 +43,8 @@ const CompletePage = () => {
             marked as complete
           </p>
         </div>
+
+        {/* SORT CONTROLS */}
       </div>
     </div>
   )
