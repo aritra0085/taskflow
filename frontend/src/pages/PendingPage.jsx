@@ -1,8 +1,23 @@
 import { ListCheck } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 import { layoutClasses } from '../assets/dummy'
+import {useOutletContext} from 'react-router-dom'
+
+const API_BASE = 'http://localhost:4000/api/tasks'
 
 const PendingPage = () => {
+
+  const {tasks = [], refreshTasks} = useOutletContext();
+  const [sortBy,setSortBy] = useState('newest')
+  const [selectedTask, setSelectedTask] = useState(null)
+  const [showModal, setShowModal] = useState(false)
+
+  const getHeaders = () => {
+    const token = localStorage.getItem('token')
+    if (!token) throw new Error('No auth token found')
+      return{'Content-Type':'application/json',Authorization: `Bearer ${token}`}
+  }
+
   return (
     <div className={layoutClasses.container}>
       <div className={layoutClasses.headerWrapper}>
