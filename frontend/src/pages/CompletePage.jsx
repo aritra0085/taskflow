@@ -62,9 +62,18 @@ const CompletePage = () => {
                   </option>
                 ))}
               </select>
-              {/* DESKSTOP BUTTONs */}
-              <div>
-
+              {/* DESKSTOP BUTTONS */}
+              <div className={CT_CLASSES.btnGroup}>
+                  {SORT_OPTIONS.map(opt => (
+                    <button key={opt.id} onClick={() => setSortBy(opt.id)}
+                    className={[
+                      CT_CLASSES.btnBase,
+                      sortBy === opt.id ? CT_CLASSES.btnActive : CT_CLASSES.btnInactive
+                    ].join(" ")}>
+                      {opt.icon}
+                      {opt.label}
+                    </button>
+                  ))}
               </div>
           </div>
         </div>
