@@ -35,10 +35,12 @@ const CompletePage = () => {
         <div className={CT_CLASSES.titleWrapper}>
           <h1 className={CT_CLASSES.title}>
             <CheckCircle2 className='text-purple-500 w-5 h-5 md:w-6 md:h-6'/>
+            <span className='truncate'>Completed Tasks</span>
           </h1>
 
           <p className={CT_CLASSES.subtitle}>
-            {}
+            {sortedCompletedTasks.length} task{sortedCompletedTasks.length !== 1 && 's'} {' '}
+            marked as complete
           </p>
         </div>
       </div>
