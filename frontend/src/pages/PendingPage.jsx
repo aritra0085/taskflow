@@ -1,6 +1,6 @@
 import { Filter, ListCheck } from 'lucide-react'
 import React, { useMemo, useState } from 'react'
-import { layoutClasses } from '../assets/dummy'
+import { layoutClasses, SORT_OPTIONS } from '../assets/dummy'
 import {useOutletContext} from 'react-router-dom'
 
 const API_BASE = 'http://localhost:4000/api/tasks'
@@ -48,6 +48,22 @@ const PendingPage = () => {
             <Filter className='w-4 h-4 text-purple-500'/>
             <span className='text-sm'>Sort by:</span>
           </div>
+
+          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}
+            className={layoutClasses.select}>
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest</option>
+              <option value="priority">By priority</option>
+            </select>
+
+            <div className={layoutClasses.tabWrapper}>
+              {SORT_OPTIONS.map(opt => (
+                <button key={opt.id} onClick={() => setSortBy(opt.id)}
+                className={layoutClasses.tabButton(sortBy === opt.id)}>
+                  {opt.icon} {opt.label}
+                </button>
+              ))}
+            </div>
         </div>
       </div>
     </div>
