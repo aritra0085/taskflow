@@ -1,4 +1,4 @@
-import { Filter, ListCheck } from 'lucide-react'
+import { Filter, ListCheck, Plus } from 'lucide-react'
 import React, { useMemo, useState } from 'react'
 import { layoutClasses, SORT_OPTIONS } from '../assets/dummy'
 import {useOutletContext} from 'react-router-dom'
@@ -57,14 +57,22 @@ const PendingPage = () => {
             </select>
 
             <div className={layoutClasses.tabWrapper}>
-              {SORT_OPTIONS.map(opt => (
-                <button key={opt.id} onClick={() => setSortBy(opt.id)}
-                className={layoutClasses.tabButton(sortBy === opt.id)}>
-                  {opt.icon} {opt.label}
-                </button>
-              ))}
+                {SORT_OPTIONS.map(opt => (
+                  <button key={opt.id} onClick={() => setSortBy(opt.id)}
+                  className={layoutClasses.tabButton(sortBy === opt.id)}>
+                    {opt.icon} {opt.label}
+                  </button>
+                ))}
             </div>
         </div>
+      </div>
+
+      <div className={layoutClasses.addBox} onClick={() => setShowModal(true)}>
+          <div className='flex items-center justify-center gap-3 text-gray-500 group-hover:text-purple-600 transition-colors'>
+            <div className='w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:shadow-md transition-all duration-200'>
+              <Plus className='text-purple-500' size={18} />
+              </div>
+          </div>      
       </div>
     </div>
   )
